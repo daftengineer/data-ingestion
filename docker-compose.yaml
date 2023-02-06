@@ -1,0 +1,45 @@
+version: "3.7"
+services:
+  timescale:
+    image: timescale/timescaledb:latest-pg13
+    container_name: local_timescale
+    restart: always
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+    ports:
+      - 5432:5432
+    volumes:
+      - timescale:/var/lib/postgresql/data
+  python_api:
+    build:
+      dockerfile: API_DOCKERFILE
+    container_name: local_api
+    restart: always
+    ports:
+      - 8000:8000
+  rabbitmq:
+    image: rabbitmq:3-management-alpine
+    container_name: rabbitmq
+    ports:
+        - 5672:5672
+        - 15672:15672
+    volumes:
+        - rmq_data:/var/lib/rabbitmq/
+        - rmq_logs:/var/log/rabbitmq
+  # go_worker:
+  #   build:
+  #     dockerfile: go_worker/GO_WORKER_DOCKERFILE
+  #   container_name: go_worker
+  python_worker:
+    build:
+      dockerfile: PYTHON_WORKER_DOCKERFILE
+    container_name: python_worker
+    restart: always
+volumes:
+  timescale:
+    driver: local
+  rmq_data:
+    driver: local
+  rmq_logs:
+    driver: local

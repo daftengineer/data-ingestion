@@ -1,0 +1,8 @@
+{
+    "timescaledb_host": "local_timescale",
+    "timescaledb_port": "5432",
+    "username": "postgres",
+    "password": "postgres",
+    "database_name" : "test",
+    "rmq_host_name":"rabbitmq"
+}

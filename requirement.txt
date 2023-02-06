@@ -1,0 +1,5 @@
+fastapi[all]
+psycopg2-binary
+sqlalchemy-utils
+pandas
+pika

@@ -1,0 +1,6 @@
+FROM golang:1.16-alpine
+WORKDIR /app
+COPY go_worker/consumer.go ./
+RUN go mod init daftengineer.com/file_ingestion
+RUN go mod tidy
+ENTRYPOINT go run /app/consumer.go

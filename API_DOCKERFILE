@@ -1,0 +1,8 @@
+FROM python:3.10.6-slim
+ADD api.py /
+ADD requirement.txt /
+ADD producer.py /
+ADD config.json /
+RUN pip install -r requirement.txt
+EXPOSE 8000
+ENTRYPOINT uvicorn api:app --reload --host 0.0.0.0

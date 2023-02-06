@@ -1,0 +1,6 @@
+FROM python:3.10.6-slim
+ADD consumer.py /
+ADD requirement.txt /
+ADD config.json /
+RUN pip install -r requirement.txt
+ENTRYPOINT python3 consumer.py DEFAULT_ROUTING_KEY
